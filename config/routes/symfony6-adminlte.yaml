@@ -1,0 +1,3 @@
+symfony6-adminlte:
+  resource: '@Symfony6AdminLte/config/routing/module.yaml'
+  prefix: /symfony6-adminlte

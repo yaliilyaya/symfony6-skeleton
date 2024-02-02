@@ -1,0 +1,32 @@
+version: '3'
+#https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
+services:
+  #PHP Service
+  app:
+    image: yaliilyaya2/symfony6-skeleton-app:base
+    build:
+      context: dockerfile/app-base
+    restart: always
+    volumes:
+      - ./:/project
+  #Nginx Service
+  webserver:
+    image: yaliilyaya2/symfony6-skeleton-webserver:latest
+    build:
+      context: dockerfile/webserver
+    depends_on:
+      - app
+    restart: always
+    volumes:
+      - ./:/project
+  db:
+    image: yaliilyaya2/symfony6-skeleton-db:latest
+    build:
+      context: dockerfile/db
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci

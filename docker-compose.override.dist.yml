@@ -1,0 +1,16 @@
+version: '3'
+#https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
+services:
+  #Nginx Service
+  webserver:
+    ports:
+      - 23180:80
+  db:
+    ports:
+      - 23188:3306
+    volumes:
+      # - ./dockerfile/db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+      # - ./dockerfile/db/etc/mysql:/etc/mysql/conf.d
+      - db.volume:/var/lib/mysql:rw
+volumes:
+  db.volume:
