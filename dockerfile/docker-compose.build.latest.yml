@@ -1,0 +1,25 @@
+version: '3'
+#https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
+services:
+  #PHP Service
+  app:
+    image: yaliilyaya2/symfony6-skeleton-app:latest
+    build:
+      context: app
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: app
+        SERVICE_TAGS: dev
+        WORKING_DIR: /project
+        GIT_REPOSITORY: 'git@github.com/yaliilyaya/symfony6-skeleton.git'
+  front:
+    image: yaliilyaya2/symfony6-skeleton-front:latest
+    build:
+      context: front-base
+      dockerfile: Dockerfile
+  #Nginx Service
+  webserver:
+    image: yaliilyaya2/symfony6-skeleton-webserver:latest
+    build:
+      context: webserver
+      dockerfile: Dockerfile
