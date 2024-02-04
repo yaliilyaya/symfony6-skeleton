@@ -19,3 +19,14 @@ services:
     restart: always
     volumes:
       - ./:/project
+  db:
+    image: yaliilyaya2/symfony6-skeleton-db:latest
+    build:
+      context: dockerfile/db
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
