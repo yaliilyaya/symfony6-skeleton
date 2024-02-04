@@ -90,9 +90,14 @@
             "mkdir -p public/cache",
             "cp -rf vendor/yaliilyaya/symfony6-adminlte/assets public/cache/adminlte"
         ],
-        "create-db": [
+        "create-db": "@create-db-mysql",
+        "create-db-mysql": [
+            "bin/console doctrine:database:create -q --if-not-exists",
+            "bin/console doctrine:migrations:migrate -q"
+        ],
+        "create-db-sqlite": [
             "chmod 777 data",
-            "bin/console doctrine:database:create",
+            "bin/console doctrine:database:create -q --if-not-exists",
             "chmod 777 data/data.db",
             "bin/console doctrine:migrations:migrate -q"
         ],
