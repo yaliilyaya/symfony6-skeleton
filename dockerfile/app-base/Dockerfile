@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-COPY local.ini /usr/local/etc/php/conf.d/local.ini
+COPY ./etc/local.ini /usr/local/etc/php/conf.d/local.ini
 
 ## Copy composer.lock and composer.json
 #COPY composer.lock composer.json /var/www/
@@ -37,13 +37,15 @@ RUN docker-php-ext-install pdo pdo_mysql zip xsl gd intl opcache exif mbstring
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
     && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
-
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN export PATH="$HOME/.symfony5/bin:$PATH"
 
+RUN apt-get install -y supervisor
+COPY ./etc/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./etc/supervisor.d/ /etc/supervisor/conf.d/
 
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
+EXPOSE 80 9001
 
-CMD ["symfony", "serve", "--port=80", "--no-tls", "--dir=/project", "--listen-ip=0.0.0.0"]
+#CMD ["tail", "-f", "/etc/hosts"]
+CMD ["/usr/bin/supervisord", "--nodaemon", "-c" , "/etc/supervisor/supervisord.conf"]

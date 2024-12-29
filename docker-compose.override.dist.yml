@@ -1,10 +1,10 @@
 version: '3'
 #https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
 services:
-  #Nginx Service
-  webserver:
+  app:
     ports:
-      - 23180:80
+      - 23180:80 #symfony server
+      - 23181:9001 #supervisord
   db:
     ports:
       - 23188:3306
