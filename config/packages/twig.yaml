@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         parameters:
+            title: "Symfony6AdminLte"
 
 when@test:
     twig:
