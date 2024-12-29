@@ -77,14 +77,12 @@
         "post-install-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
-            "@auto-scripts",
-            "@create-db"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
-            "@auto-scripts",
-            "@create-db"
+            "@auto-scripts"
         ],
         "assets-adminlte": [
             "mkdir -p public/cache",

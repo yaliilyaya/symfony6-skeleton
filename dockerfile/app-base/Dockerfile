@@ -45,6 +45,8 @@ RUN apt-get install -y supervisor
 COPY ./etc/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ./etc/supervisor.d/ /etc/supervisor/conf.d/
 
+RUN git config --global --add safe.directory /project
+
 EXPOSE 80 9001
 
 #CMD ["tail", "-f", "/etc/hosts"]
