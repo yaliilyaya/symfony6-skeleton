@@ -34,12 +34,16 @@ RUN docker-php-ext-install pdo pdo_mysql zip xsl gd intl opcache exif mbstring
 #RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
 #RUN docker-php-ext-install gd
 
-RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN wget https://get.symfony.com/cli/installer -O - | bash \
+    && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN export PATH="$HOME/.symfony5/bin:$PATH"
 
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD ["php-fpm"]
+
+CMD ["symfony", "serve", "--port=80", "--no-tls", "--dir=/project", "--listen-ip=0.0.0.0"]

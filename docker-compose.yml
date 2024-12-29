@@ -10,15 +10,6 @@ services:
     volumes:
       - ./:/project
   #Nginx Service
-  webserver:
-    image: yaliilyaya2/symfony6-skeleton-webserver:latest
-    build:
-      context: dockerfile/webserver
-    depends_on:
-      - app
-    restart: always
-    volumes:
-      - ./:/project
   db:
     image: yaliilyaya2/symfony6-skeleton-db:latest
     build:
