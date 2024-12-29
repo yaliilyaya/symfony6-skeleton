@@ -8,9 +8,10 @@ services:
   db:
     ports:
       - 23188:3306
-    volumes:
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: developer
+#    volumes:
       # - ./dockerfile/db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
       # - ./dockerfile/db/etc/mysql:/etc/mysql/conf.d
-      - db.volume:/var/lib/mysql:rw
-volumes:
-  db.volume:

@@ -77,12 +77,14 @@
         "post-install-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
-            "@auto-scripts"
+            "@auto-scripts",
+            "@create-db"
         ],
         "post-update-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
-            "@auto-scripts"
+            "@auto-scripts",
+            "@create-db"
         ],
         "assets-adminlte": [
             "mkdir -p public/cache",
@@ -99,10 +101,11 @@
             "chmod 777 data/data.db",
             "bin/console doctrine:migrations:migrate -q"
         ],
-        "chmod-template-path": [
-            "rm -rf data/tmp/*",
-            "mkdir -p data/tmp",
-            "chmod 777 data/tmp"
+        "doctrine:migrations:diff": [
+            "bin/console doctrine:migrations:diff -q --allow-empty-diff"
+        ],
+        "test": [
+            "php bin/phpunit --log-junit junit-report.xml -vvv"
         ]
     },
     "conflict": {
