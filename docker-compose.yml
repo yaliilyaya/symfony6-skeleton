@@ -14,6 +14,7 @@ services:
     image: yaliilyaya2/symfony6-skeleton-db:latest
     build:
       context: dockerfile/db
+    restart: always
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: app
