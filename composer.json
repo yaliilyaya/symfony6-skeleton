@@ -78,13 +78,13 @@
             "@chmod-template-path",
             "@assets-adminlte",
             "@auto-scripts",
-            "@doctrine:migrations:diff"
+            "@doctrine:migrations:migrate"
         ],
         "post-update-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
             "@auto-scripts",
-            "@doctrine:migrations:diff"
+            "@doctrine:migrations:migrate"
         ],
         "app:cache-clear": [
             "bin/console cache:clear"
