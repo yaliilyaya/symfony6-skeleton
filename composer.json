@@ -78,24 +78,27 @@
             "@chmod-template-path",
             "@assets-adminlte",
             "@auto-scripts",
-            "@create-db"
+            "@doctrine:migrations:diff"
         ],
         "post-update-cmd": [
             "@chmod-template-path",
             "@assets-adminlte",
             "@auto-scripts",
-            "@create-db"
+            "@doctrine:migrations:diff"
+        ],
+        "app:cache-clear": [
+            "bin/console cache:clear"
         ],
         "assets-adminlte": [
             "mkdir -p public/cache",
             "cp -rf vendor/yaliilyaya/symfony6-adminlte/assets public/cache/adminlte"
         ],
-        "create-db": "@create-db-mysql",
-        "create-db-mysql": [
+        "doctrine:migrations:migrate": "@doctrine:migrations:migrate-mysql",
+        "doctrine:migrations:migrate-mysql": [
             "bin/console doctrine:database:create -q --if-not-exists",
             "bin/console doctrine:migrations:migrate -q"
         ],
-        "create-db-sqlite": [
+        "doctrine:migrations:migrate-sqlite": [
             "chmod 777 data",
             "bin/console doctrine:database:create -q --if-not-exists",
             "chmod 777 data/data.db",
